@@ -1,0 +1,27 @@
+package rules
+
+import com.lixar.drools_demo.model.Purchase
+
+rule "purchase over 15 and less than 25 dollars"
+when
+    $purchase : Purchase( total > 15, total <= 25)
+then
+    $purchase.setDiscount(0.10);
+    System.out.println("Level 1 discount: " + $purchase.getDiscount());
+end
+
+rule "purchase over 25 dollars"
+when
+    $purchase : Purchase( total > 25 )
+then
+    $purchase.setDiscount(0.15);
+    System.out.println("Level 2 discount: " + $purchase.getDiscount());
+end
+
+rule "purchase contains combo" salience -1
+when
+    $purchase : Purchase( drinkIncluded, tacoCount >= 2 )
+then
+    $purchase.setDiscount($purchase.getDiscount() + 0.05);
+    System.out.println("Combo discount: " + $purchase.getDiscount());
+end
