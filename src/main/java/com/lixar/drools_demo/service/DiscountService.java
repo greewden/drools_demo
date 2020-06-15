@@ -22,8 +22,10 @@ public class DiscountService {
         // Create a session that contains the rules defined in the discountRules.drl file.
         KieSession kieSession = getKieSession("ksession-rules");
 
-        // Add facts to the session
+        // Add facts which consists of the purchase to the session
         kieSession.insert(purchase);
+
+        // Apply the rules
         int fired = kieSession.fireAllRules();
         kieSession.dispose();
         System.out.println("Number of Rules executed = " + fired);

@@ -33,7 +33,9 @@ class DiscountServiceTest {
         Purchase purchase = new Purchase(PRICE_UNDER_25_AND_OVER_15, SINGLE_TACO, false);
         double result = discountService.calculateDiscount(purchase);
 
+        // Verify that a %10 discount is applied to a purchase that is over $15 and under $25
         assertThat(result).isEqualTo(0.10);
+        System.out.println("Successfully applied a %10 discount to a $" + PRICE_UNDER_25_AND_OVER_15 + " purchase." );
     }
 
     @Test
@@ -41,7 +43,10 @@ class DiscountServiceTest {
         Purchase purchase = new Purchase(PRICE_UNDER_15, SINGLE_TACO, false);
         double result = discountService.calculateDiscount(purchase);
 
+        // Verify that no discount is applied to a purchase under $15
         assertThat(result).isEqualTo(0);
+        System.out.println("Successfully applied a %0 discount to a $" + PRICE_UNDER_15 + " purchase." );
+
     }
 
     @Test
@@ -49,7 +54,9 @@ class DiscountServiceTest {
         Purchase purchase = new Purchase(PRICE_OVER_25, SINGLE_TACO, true);
         double result = discountService.calculateDiscount(purchase);
 
+        // Verify that a %15 discount is applied to a purchase that is over $25
         assertThat(result).isEqualTo(0.15);
+        System.out.println("Successfully applied a %15 discount to a $" + PRICE_OVER_25 + " purchase." );
     }
 
     @Test
@@ -57,7 +64,10 @@ class DiscountServiceTest {
         Purchase purchase = new Purchase(PRICE_OVER_25, MULTIPLE_TACOS, true);
         double result = discountService.calculateDiscount(purchase);
 
+        // Verify that a %20 discount is applied to a combo purchase that is over $25
         assertThat(result).isEqualTo(0.20);
+        System.out.println("Successfully applied a %20 discount to a $" + PRICE_OVER_25 + " combo purchase." );
+
     }
 
     @Test
@@ -65,7 +75,9 @@ class DiscountServiceTest {
         Purchase purchase = new Purchase(PRICE_UNDER_25_AND_OVER_15, MULTIPLE_TACOS, true);
         double result = discountService.calculateDiscount(purchase);
 
+        // Verify that a %15 discount is applied to a combo purchase that is over $15 and under $25
         assertThat(result).isCloseTo(0.15, Offset.offset(0.01));
+        System.out.println("Successfully applied a %15 discount to a $" + PRICE_UNDER_25_AND_OVER_15 + " combo purchase." );
     }
 
     @Test
@@ -73,6 +85,8 @@ class DiscountServiceTest {
         Purchase purchase = new Purchase(PRICE_UNDER_15, MULTIPLE_TACOS, true);
         double result = discountService.calculateDiscount(purchase);
 
+        // Verify that %5 discount is applied to a combo purchase under $15
         assertThat(result).isEqualTo(0.05);
+        System.out.println("Successfully applied a %5 discount to a $" + PRICE_UNDER_15 + " combo purchase." );
     }
 }

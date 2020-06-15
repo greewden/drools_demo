@@ -2,6 +2,8 @@ package com.lixar.drools_demo.model;
 
 import java.math.BigDecimal;
 
+// POJO representing a purchase made by a customer. The discount field will be
+// set after the discountRules are applied by the Drools rule engine.
 public class Purchase {
 
     private BigDecimal total;
